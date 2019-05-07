@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:audioplayer/audioplayer.dart';
+
 
 class CigenDetailPage extends StatefulWidget {
   var word;
@@ -15,6 +17,7 @@ class CigenDetailPage extends StatefulWidget {
 
 class _CigenDetailPageState extends State<CigenDetailPage> {
   bool favorite = false;
+  AudioPlayer audioPlayer = new AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +217,8 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
     }
   }
 
-  void playVoiceAction(){
-
+  void playVoiceAction() async{
+    String url = 'http://dict.youdao.com/dictvoice?audio='+widget.word['word']+'&type=2';
+    await audioPlayer.play(url);
   }
 }
