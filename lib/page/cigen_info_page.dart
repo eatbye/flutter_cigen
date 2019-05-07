@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
+import 'package:flutter_cigen/page/cigen_detail_page.dart';
 import 'package:flutter_cigen/widget/title_widget.dart';
 import 'package:weui/weui.dart';
 
@@ -86,8 +88,22 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
               var word = wordList[index];
               return Container(
                   decoration: BoxDecoration(color: Colors.white),
-                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  child: Text(word['word']));
+                  padding: EdgeInsets.fromLTRB(12, 6, 12, 6),
+                  child: InkWell(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(word['word']),
+                        Text(word['notes'], style: TextStyle(color: Colors.black87, fontSize: 13.0),),
+                      ],
+                    ),
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => CigenDetailPage(word)));
+                    },
+                  ));
             },
             separatorBuilder: (context, index) {
               return Divider(height: 0, color: Colors.black26,);
