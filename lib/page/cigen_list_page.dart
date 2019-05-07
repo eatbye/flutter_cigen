@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/item_dao.dart';
+import 'package:flutter_cigen/page/cigen_info_page.dart';
 
 class CigenListPage extends StatefulWidget {
   String type;
@@ -7,14 +9,12 @@ class CigenListPage extends StatefulWidget {
   CigenListPage(this.type);
 
   @override
-  _CigenListPageState createState() => _CigenListPageState(type);
+  _CigenListPageState createState() => _CigenListPageState();
 }
 
-class _CigenListPageState extends State<CigenListPage> with AutomaticKeepAliveClientMixin{
-  String type;
+class _CigenListPageState extends State<CigenListPage>
+    with AutomaticKeepAliveClientMixin {
   List<Map> itemList = [];
-
-  _CigenListPageState(this.type);
 
   @override
   bool get wantKeepAlive => true;
@@ -28,17 +28,33 @@ class _CigenListPageState extends State<CigenListPage> with AutomaticKeepAliveCl
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      body: Center(child: Text(type)),
       body: ListView.separated(
-          itemBuilder: (context, index){
+          itemBuilder: (context, index) {
             var item = itemList[index];
-            return Container(
-                padding: EdgeInsets.fromLTRB(10,6,10,6),
-                child: Text(item['desc']));
+            return InkWell(
+              child: Container(
+                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  child: Text(item['desc'])
+              ),
+              onTap: (){
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => CigenInfoPage(item)));
+              },
+            );
 //            return ListTile(title: Text(item['desc']),);
+            /*
+            return ListTile(
+              title: Text(item['desc']),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+
+            );
+            */
           },
           separatorBuilder: (context, index) {
-            return Divider();
+            return Divider(height: 0);
           },
           itemCount: itemList.length),
     );
@@ -46,8 +62,8 @@ class _CigenListPageState extends State<CigenListPage> with AutomaticKeepAliveCl
 
   //数据库查询
   void getItemList() async {
-    itemList = await ItemDao.listItem(type);
+    itemList = await ItemDao.listItem(widget.type);
     setState(() {});
-    print(itemList.length);
   }
+
 }

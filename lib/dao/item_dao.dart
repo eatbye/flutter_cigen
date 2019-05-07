@@ -5,7 +5,7 @@ class ItemDao{
 
   static Future<List<Map>> listItem(type) async {
     var db = await DatabaseHelper().db;
-    String sql = 'SELECT * FROM items';
+    String sql = 'SELECT rowid,vid,desc,flag FROM items';
     if(type=='1'){ //前缀
       sql = sql + ' where vid=1 or vid=2';
     }else if(type=='2'){ //后缀
