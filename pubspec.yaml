@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   sqflite: ^1.1.5         #sqlite数据库
   weui: ^0.0.4
+  flutter_html: ^0.9.6
+  fluttertoast: ^3.0.4
 
 dev_dependencies:
   flutter_test:
