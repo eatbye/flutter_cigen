@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cigen/page/cigen_tabbar_page.dart';
 import 'package:flutter_cigen/page/temp_page.dart';
 
 class BottomBarPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
 
   //底部导航对应的页面(状态保持的时候，必须返回泛型)
   final List<Widget> bottomPages = [
-    TempPage(),
+    CigenTabbarPage(),
     TempPage(),
     TempPage(),
   ];
