@@ -110,7 +110,7 @@ class _DictPageState extends State<DictPage>
 //                    ),
 //                  ],
 //                )),
-              child: ListCell(word['word'], subTitle: word['notes'],),
+              child: ListCell(word['word'], subTitle: word['notes'], showDetailArrow: true,),
           );
         },
         separatorBuilder: (context, index) {

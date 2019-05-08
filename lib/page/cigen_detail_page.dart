@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/notebook_dao.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
+import 'package:flutter_cigen/util/counter.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayer/audioplayer.dart';
 import 'package:intl/intl.dart';
+import 'package:provide/provide.dart';
 
 
 class CigenDetailPage extends StatefulWidget {
@@ -253,6 +255,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
 
   //加入收藏、取消收藏
   void favoriteAction() async{
+
     var notebook = await NotebookDao.getNotebook(widget.word['word']);
     if (notebook == null){
       //加入收藏
@@ -280,6 +283,9 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
         textColor: Colors.white,
       );
     }
+
+    //状态更新（收藏）
+    Provide.value<Counter>(context).favorite();
 
     setState(() {});
 
