@@ -28,6 +28,8 @@ dependencies:
   flutter_html: ^0.9.6
   fluttertoast: ^3.0.4
   audioplayer: ^0.5.2
+  intl: ^0.15.8
+
 
 dev_dependencies:
   flutter_test:

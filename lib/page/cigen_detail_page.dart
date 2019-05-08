@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cigen/dao/notebook_dao.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayer/audioplayer.dart';
+import 'package:intl/intl.dart';
 
 
 class CigenDetailPage extends StatefulWidget {
@@ -18,6 +20,13 @@ class CigenDetailPage extends StatefulWidget {
 class _CigenDetailPageState extends State<CigenDetailPage> {
   bool favorite = false;
   AudioPlayer audioPlayer = new AudioPlayer();
+
+
+  @override
+  void initState() {
+    super.initState();
+    getWordInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +47,20 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
       ),
     );
   }
+
+  //从数据库查询是否在收藏夹中
+  void getWordInfo() async {
+    var notebook = await NotebookDao.getNotebook(widget.word['word']);
+    if (notebook == null){
+      favorite = false;
+    }else{
+      favorite = true;
+    }
+    setState(() {
+
+    });
+  }
+
 
   Widget detailContentWidget() {
     return Stack(
@@ -162,8 +185,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
           FlatButton(
             child: favoriteIcon,
             onPressed: () {
-              favorite = !favorite;
-              setState(() {});
+              favoriteAction();
             },
           ),
           FlatButton(
@@ -193,6 +215,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
       );
     } else {
       widget.word = word;
+      getWordInfo();
       setState(() {});
     }
   }
@@ -213,6 +236,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
       );
     } else {
       widget.word = word;
+      getWordInfo();
       setState(() {});
     }
   }
@@ -221,4 +245,39 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
     String url = 'http://dict.youdao.com/dictvoice?audio='+widget.word['word']+'&type=2';
     await audioPlayer.play(url);
   }
+
+  //加入收藏、取消收藏
+  void favoriteAction() async{
+    var notebook = await NotebookDao.getNotebook(widget.word['word']);
+    if (notebook == null){
+      //加入收藏
+      favorite = true;
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat('yyyy-MM-dd HH:mm').format(now);
+      await NotebookDao.saveNotebook(widget.word['word'], widget.word['detail'], formattedDate);
+
+      Fluttertoast.showToast(
+        msg: "成功将单词加入生词本",
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+      );
+    }else{
+      //移出收藏
+      favorite = false;
+      await NotebookDao.deleteNotebook(widget.word['word']);
+
+
+      Fluttertoast.showToast(
+        msg: "将单词从生词本中移出",
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+      );
+    }
+
+    setState(() {});
+
+  }
+
 }
