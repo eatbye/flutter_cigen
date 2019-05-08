@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_cigen/page/cigen_detail_page.dart';
+import 'package:flutter_cigen/widget/list_cell.dart';
 
 class DictPage extends StatefulWidget {
   @override
@@ -97,18 +98,19 @@ class _DictPageState extends State<DictPage>
                   CupertinoPageRoute(
                       builder: (context) => CigenDetailPage(word, false)));
             },
-            child: Container(
-                padding: EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(word['word']),
-                    Text(
-                      word['notes'],
-                      style: TextStyle(color: Colors.black87, fontSize: 13.0),
-                    ),
-                  ],
-                )),
+//            child: Container(
+//                padding: EdgeInsets.all(12),
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.start,
+//                  children: <Widget>[
+//                    Text(word['word']),
+//                    Text(
+//                      word['notes'],
+//                      style: TextStyle(color: Colors.black87, fontSize: 13.0),
+//                    ),
+//                  ],
+//                )),
+              child: ListCell(word['word'], subTitle: word['notes'],),
           );
         },
         separatorBuilder: (context, index) {

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/item_dao.dart';
 import 'package:flutter_cigen/page/cigen_info_page.dart';
+import 'package:flutter_cigen/widget/list_cell.dart';
 
 class CigenListPage extends StatefulWidget {
   String type;
@@ -32,10 +33,11 @@ class _CigenListPageState extends State<CigenListPage>
           itemBuilder: (context, index) {
             var item = itemList[index];
             return InkWell(
-              child: Container(
-                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  child: Text(item['desc'])
-              ),
+//              child: Container(
+//                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+//                  child: Text(item['desc'])
+//              ),
+              child: ListCell(item['desc']),
               onTap: (){
                 Navigator.push(
                     context,

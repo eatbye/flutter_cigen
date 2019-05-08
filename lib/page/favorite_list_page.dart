@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/notebook_dao.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_cigen/page/cigen_detail_page.dart';
+import 'package:flutter_cigen/widget/list_cell.dart';
 
 //生词本列表
 class FavoriteListPage extends StatefulWidget {
@@ -43,18 +44,19 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
                 NotebookDao.deleteNotebook(notebook['english']);
               },
               background: stackBehindDismiss(), //滑动后显示的背景内容
-              child: Container(
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(notebook['english']),
-                      Text(
-                        notebook['chinese'],
-                        style: TextStyle(color: Colors.black87, fontSize: 13.0),
-                      ),
-                    ],
-                  )),
+//              child: Container(
+//                  padding: EdgeInsets.all(12),
+//                  child: Column(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Text(notebook['english']),
+//                      Text(
+//                        notebook['chinese'],
+//                        style: TextStyle(color: Colors.black87, fontSize: 13.0),
+//                      ),
+//                    ],
+//                  )),
+              child: ListCell(notebook['english'], subTitle: notebook['chinese'], showDetail: true,),
             ),
           );
         },

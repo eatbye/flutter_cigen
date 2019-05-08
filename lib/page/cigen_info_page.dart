@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/item_dao.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_cigen/page/cigen_detail_page.dart';
+import 'package:flutter_cigen/widget/list_cell.dart';
 import 'package:flutter_cigen/widget/title_widget.dart';
 import 'package:weui/weui.dart';
 
@@ -96,15 +97,16 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
               var word = wordList[index];
               return Container(
                   decoration: BoxDecoration(color: Colors.white),
-                  padding: EdgeInsets.fromLTRB(12, 6, 12, 6),
+//                  padding: EdgeInsets.fromLTRB(12, 6, 12, 6),
                   child: InkWell(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(word['word']),
-                        Text(word['notes'], style: TextStyle(color: Colors.black87, fontSize: 13.0),),
-                      ],
-                    ),
+//                    child: Column(
+//                      crossAxisAlignment: CrossAxisAlignment.start,
+//                      children: <Widget>[
+//                        Text(word['word']),
+//                        Text(word['notes'], style: TextStyle(color: Colors.black87, fontSize: 13.0),),
+//                      ],
+//                    ),
+                    child: ListCell(word['word'], subTitle:word['notes']),
                     onTap: (){
                       Navigator.push(
                           context,
