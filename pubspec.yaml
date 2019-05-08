@@ -31,6 +31,7 @@ dependencies:
   intl: ^0.15.8
   cupertino_controllers: ^0.1.0
   provide: ^1.0.2     #状态管理
+  flutter_bugly: ^0.2.0
 
 
 
