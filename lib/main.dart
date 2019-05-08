@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/bottom_bar_page.dart';
+import 'package:flutter_cigen/page/favorite_list_page.dart';
+import 'package:flutter_cigen/page/notebook_list_page.dart';
+import 'package:flutter_cigen/temp/list_view.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:provide/provide.dart';
 
 //void main() => runApp(MyApp());
+
+//void main() => runApp(ListViewApp());
+//void main() => runApp(NotebookListPage());
 
 void main(){
   //main函数里面引用provide

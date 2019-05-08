@@ -41,17 +41,19 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
             var notebook = notebookList[index];
             return InkWell(
               onTap: () {
-                print(notebook['english']);
                 detailPage(notebook['english']);
               },
               child: Dismissible(
                 //滑动删除
-                key: Key(notebook['english']),
+                key: Key(notebook['english'].toString()),
                 direction: DismissDirection.endToStart,
                 //从右侧向左滑动
-                onDismissed: (direction) {
+                onDismissed: (direction)  {
                   //从生词本中移除
-                  NotebookDao.deleteNotebook(notebook['english']);
+                  removeNotebook(notebook['english']);
+                  setState(() {
+                    notebookList.removeAt(index);
+                  });
                 },
                 background: stackBehindDismiss(),
                 //滑动后显示的背景内容
@@ -85,9 +87,15 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
   }
 
   void getNotebook() async {
-    notebookList = await NotebookDao.noteList();
-    print(notebookList.length);
+    var dbNotebookList = await NotebookDao.noteList();
+    //数据库查询后需要转换存放到原来的list中，否则remove方法无法调用
+    notebookList.clear();
+    notebookList.addAll(dbNotebookList);
     setState(() {});
+  }
+
+  void removeNotebook(english) async {
+    await NotebookDao.deleteNotebook(english);
   }
 
   void detailPage(english) async {

@@ -55,7 +55,7 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
             child: TabBar(
               tabs: _tabList,
               controller: _controller,
-              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorSize: TabBarIndicatorSize.tab,  //下划线宽度
               isScrollable: false,
               labelColor: Colors.blue,
               unselectedLabelColor: Colors.black54,
