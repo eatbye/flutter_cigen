@@ -19,4 +19,10 @@ class ItemDao{
     return list;
   }
 
+  static void updateItemFlag(int rowid, int flag) async {
+    var db = await DatabaseHelper().db;
+    String sql = 'update items set flag=? where rowid=?';
+    await db.rawUpdate(sql, [flag, rowid]);
+  }
+
 }

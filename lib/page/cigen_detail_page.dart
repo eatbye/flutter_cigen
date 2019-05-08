@@ -10,8 +10,9 @@ import 'package:intl/intl.dart';
 
 class CigenDetailPage extends StatefulWidget {
   var word;
+  var showToolBar = true;
 
-  CigenDetailPage(this.word);
+  CigenDetailPage(this.word, [this.showToolBar = true]);
 
   @override
   _CigenDetailPageState createState() => _CigenDetailPageState();
@@ -163,6 +164,10 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
   }
 
   Widget toolbarWidget() {
+    if(widget.showToolBar == false){
+      return Container();
+    }
+
     var favoriteIcon = Icon(Icons.favorite_border);
     if (favorite) {
       favoriteIcon = Icon(

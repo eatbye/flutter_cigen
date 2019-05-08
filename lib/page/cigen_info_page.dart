@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cigen/dao/item_dao.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_cigen/page/cigen_detail_page.dart';
 import 'package:flutter_cigen/widget/title_widget.dart';
@@ -22,6 +23,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
   void initState() {
     super.initState();
     getWordList();
+    setReadFlag();
   }
 
   @override
@@ -77,6 +79,12 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
     int rowid = widget.item['rowid'];
     wordList = await WordDao.listWord(rowid);
     setState(() {});
+  }
+
+  //设置为已读
+  void setReadFlag() async {
+    int rowid = widget.item['rowid'];
+    ItemDao.updateItemFlag(rowid,1);
   }
 
   Widget wordListWidget() {

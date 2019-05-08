@@ -26,4 +26,10 @@ class NotebookDao{
     await db.rawDelete(sql,[english]);
   }
 
+  static noteList() async{
+    var db = await DatabaseHelper().db;
+    String sql = 'select * from notebook order by rowid desc';
+    return await db.rawQuery(sql);
+  }
+
 }

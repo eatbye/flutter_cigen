@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/cigen_tabbar_page.dart';
+import 'package:flutter_cigen/page/favorite_list_page.dart';
+import 'package:flutter_cigen/page/table_view_controller.dart';
 import 'package:flutter_cigen/page/temp_page.dart';
 
 class BottomBarPage extends StatefulWidget {
@@ -17,7 +19,8 @@ class _BottomBarPageState extends State<BottomBarPage> {
   final List<Widget> bottomPages = [
     CigenTabbarPage(),
     TempPage(),
-    TempPage(),
+    FavoriteListPage(),
+//    TableViewScreen(),
   ];
 
   @override

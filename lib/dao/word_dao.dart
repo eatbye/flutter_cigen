@@ -36,4 +36,15 @@ class WordDao{
     }
   }
 
+  static getWord(english) async {
+    var db = await DatabaseHelper().db;
+    String sql = 'select rowid,* from word where word=?';
+    List<Map> list = await db.rawQuery(sql, [english]);
+    if (list.length>0){
+      return list[0];
+    }else{
+      return null;
+    }
+  }
+
 }
