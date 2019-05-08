@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/bottom_bar_page.dart';
 import 'package:flutter_cigen/page/favorite_list_page.dart';
-import 'package:flutter_cigen/page/notebook_list_page.dart';
-import 'package:flutter_cigen/temp/list_view.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:provide/provide.dart';
 

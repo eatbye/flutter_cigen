@@ -40,13 +40,19 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
         ),
         preferredSize: Size.fromHeight(44.0),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: detailContentWidget(),
+      body: Container(
+//        color: Colors.black12,
+//        decoration: BoxDecoration(color: Colors.black12),
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: detailContentWidget(),
+              ),
+              toolbarWidget()
+            ],
           ),
-          toolbarWidget()
-        ],
+        ),
       ),
     );
   }
@@ -88,46 +94,49 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
   }
 
   Widget detailWidget() {
-    return ListView(
-      padding: EdgeInsets.all(12),
-      children: <Widget>[
-        Text(
-          widget.word['word'],
-          style: TextStyle(fontSize: 22.0),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          '词根词缀',
-          style: TextStyle(color: Colors.blue, fontSize: 16.0),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-          child: Text(widget.word['notes']),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          '词典释义',
-          style: TextStyle(color: Colors.blue, fontSize: 16.0),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-          child: Text(widget.word['detail']),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        sentenceWidget(),
-      ],
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
+      child: ListView(
+        padding: EdgeInsets.all(12),
+        children: <Widget>[
+          Text(
+            widget.word['word'],
+            style: TextStyle(fontSize: 22.0),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            '词根词缀',
+            style: TextStyle(color: Colors.blue, fontSize: 16.0),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
+            child: Text(widget.word['notes']),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            '词典释义',
+            style: TextStyle(color: Colors.blue, fontSize: 16.0),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
+            child: Text(widget.word['detail']),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          sentenceWidget(),
+        ],
+      ),
     );
   }
 
@@ -179,27 +188,33 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
     }
     return Container(
       padding: EdgeInsets.all(0),
-      decoration: BoxDecoration(color: Colors.black12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//      decoration: BoxDecoration(color: Colors.black12),
+//      color: Colors.black12,
+      child: Column(
         children: <Widget>[
-          FlatButton(
-            child: Icon(Icons.arrow_back),
-            onPressed: () {
-              preAction();
-            },
-          ),
-          FlatButton(
-            child: favoriteIcon,
-            onPressed: () {
-              favoriteAction();
-            },
-          ),
-          FlatButton(
-            child: Icon(Icons.arrow_forward_ios),
-            onPressed: () {
-              nextAction();
-            },
+          Divider(height: 0,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FlatButton(
+                child: Icon(Icons.arrow_back),
+                onPressed: () {
+                  preAction();
+                },
+              ),
+              FlatButton(
+                child: favoriteIcon,
+                onPressed: () {
+                  favoriteAction();
+                },
+              ),
+              FlatButton(
+                child: Icon(Icons.arrow_forward_ios),
+                onPressed: () {
+                  nextAction();
+                },
+              ),
+            ],
           ),
         ],
       ),
