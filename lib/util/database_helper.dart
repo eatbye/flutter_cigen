@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'dart:async';
 import 'package:sqflite/sqflite.dart';
+import 'package:synchronized/synchronized.dart';
 
 //sqlite数据库管理
 class DatabaseHelper {
   static final DatabaseHelper _instance = new DatabaseHelper.internal();
   factory DatabaseHelper() => _instance;
+
+  final _lock = new Lock(); //同步
 
   static Database _db;
 
@@ -15,7 +18,12 @@ class DatabaseHelper {
     if (_db != null) {
       return _db;
     }
-    _db = await initDb();
+    await _lock.synchronized(() async{
+      if (_db != null) {
+        return _db;
+      }
+      _db = await initDb();
+    });
     return _db;
   }
 
