@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/cigen_tabbar_page.dart';
 import 'package:flutter_cigen/page/favorite_list_page.dart';
 import 'package:flutter_cigen/page/table_view_controller.dart';
-import 'package:flutter_cigen/page/temp_page.dart';
+import 'package:flutter_cigen/page/dict_page.dart';
 
 class BottomBarPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
   //底部导航对应的页面(状态保持的时候，必须返回泛型)
   final List<Widget> bottomPages = [
     CigenTabbarPage(),
-    TempPage(),
+    DictPage(),
     FavoriteListPage(),
 //    TableViewScreen(),
   ];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/cigen_list_page.dart';
-import 'package:flutter_cigen/page/temp_page.dart';
+import 'package:flutter_cigen/page/dict_page.dart';
 
 class CigenTabbarPage extends StatefulWidget {
   @override
@@ -61,6 +61,7 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
               unselectedLabelColor: Colors.black54,
             ),
           ),
+          Divider(height: 0,),
           Expanded(
             child: TabBarView(
               children: pages,

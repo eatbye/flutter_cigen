@@ -47,4 +47,11 @@ class WordDao{
     }
   }
 
+  static searchWordList(String english) async {
+    var db = await DatabaseHelper().db;
+    String sql = 'select rowid,cid,word,notes,vid,voiceflag,detail,sentence from word where word like ?';
+    List<Map> list = await db.rawQuery(sql, [english + '%']);
+    return list;
+  }
+
 }
