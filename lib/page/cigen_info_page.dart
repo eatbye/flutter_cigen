@@ -40,41 +40,27 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
           ),
           preferredSize: Size.fromHeight(44.0)),
 
-        body: ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 20,
-          ),
-          /*
-          WeForm(
-            children: <Widget>[
-//            WeCell(
-//                content: Text(widget.item['desc']),
-//            )
-              Container(
-                  padding: EdgeInsets.all(12),
-                  child: Text(widget.item['desc']))
-            ],
-          ),
-          */
-          Divider(height: 0),
-          Container(
-              decoration: BoxDecoration(color: Colors.white),
-              padding: EdgeInsets.all(12),
-              child: Text(widget.item['desc'])),
-          Divider(height: 0),
-          SizedBox(
-            height: 20,
-          ),
-          Divider(height: 0),
-          wordListWidget(),
-          Divider(height: 0)
-//          Expanded(child: wordListWidget(),)
-//          Expanded(child: WeForm(children: <Widget>[
-//            wordListWidget()
-//          ]))
-        ],
+        body: Scrollbar(
+          child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Divider(height: 0),
+            Container(
+                decoration: BoxDecoration(color: Colors.white),
+                padding: EdgeInsets.all(12),
+                child: Text(widget.item['desc'])),
+            Divider(height: 0),
+            SizedBox(
+              height: 20,
+            ),
+            Divider(height: 0),
+            wordListWidget(),
+            Divider(height: 0)
+          ],
       ),
+        ),
 
       //body: wordListWidget()
     );
@@ -103,15 +89,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
               var word = wordList[index];
               return Container(
                   decoration: BoxDecoration(color: Colors.white),
-//                  padding: EdgeInsets.fromLTRB(12, 6, 12, 6),
                   child: InkWell(
-//                    child: Column(
-//                      crossAxisAlignment: CrossAxisAlignment.start,
-//                      children: <Widget>[
-//                        Text(word['word']),
-//                        Text(word['notes'], style: TextStyle(color: Colors.black87, fontSize: 13.0),),
-//                      ],
-//                    ),
                     child: ListCell(word['word'], subTitle:word['notes'], showDetailArrow: true,),
                     onTap: (){
                       //状态更新(已读)

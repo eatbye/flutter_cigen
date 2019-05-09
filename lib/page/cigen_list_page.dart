@@ -42,27 +42,29 @@ class _CigenListPageState extends State<CigenListPage>
             //getItemList();
 
           return Scaffold(
-            body: ListView.separated(
-                itemBuilder: (context, index) {
-                  var item = itemList[index];
-                  var icon = Image.asset('assets/image/dot_unread.png');
-                  if(item['flag'] ==1){
-                    icon = Image.asset('assets/image/dot_read.png');
-                  }
-                  return InkWell(
-                    child: ListCell(item['desc'], showDetailArrow: true,icon: icon,),
-                    onTap: ()  {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => CigenInfoPage(item)));
-                    },
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(height: 0);
-                },
-                itemCount: itemList.length),
+            body: Scrollbar(
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    var item = itemList[index];
+                    var icon = Image.asset('assets/image/dot_unread.png');
+                    if(item['flag'] ==1){
+                      icon = Image.asset('assets/image/dot_read.png');
+                    }
+                    return InkWell(
+                      child: ListCell(item['desc'], showDetailArrow: true,icon: icon,),
+                      onTap: ()  {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => CigenInfoPage(item)));
+                      },
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(height: 0);
+                  },
+                  itemCount: itemList.length),
+            ),
           );
 
         }

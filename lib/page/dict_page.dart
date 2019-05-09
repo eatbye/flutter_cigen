@@ -46,14 +46,16 @@ class _DictPageState extends State<DictPage>
             title: Text('英汉词典'),
           ),
           preferredSize: Size.fromHeight(44.0)),
-      body: ListView(
-        children: <Widget>[
-          searchBarWidget(),
-          Divider(
-            height: 0.5,
-          ),
-          listViewWidget(),
-        ],
+      body: Scrollbar(
+        child: ListView(
+          children: <Widget>[
+            searchBarWidget(),
+            Divider(
+              height: 0.5,
+            ),
+            listViewWidget(),
+          ],
+        ),
       ),
     );
   }

@@ -36,39 +36,41 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
               title: Text('生词本'),
             ),
             preferredSize: Size.fromHeight(44.0)),
-        body: ListView.separated(
-          itemBuilder: (context, index) {
-            var notebook = notebookList[index];
-            return InkWell(
-              onTap: () {
-                detailPage(notebook['english']);
-              },
-              child: Dismissible(
-                //滑动删除
-                key: Key(notebook['english'].toString()),
-                direction: DismissDirection.endToStart,
-                //从右侧向左滑动
-                onDismissed: (direction)  {
-                  //从生词本中移除
-                  removeNotebook(notebook['english']);
-                  setState(() {
-                    notebookList.removeAt(index);
-                  });
+        body: Scrollbar(
+          child: ListView.separated(
+            itemBuilder: (context, index) {
+              var notebook = notebookList[index];
+              return InkWell(
+                onTap: () {
+                  detailPage(notebook['english']);
                 },
-                background: stackBehindDismiss(),
-                //滑动后显示的背景内容
-                child: ListCell(
-                  notebook['english'],
-                  subTitle: notebook['chinese'],
-                  showDetailArrow: true,
+                child: Dismissible(
+                  //滑动删除
+                  key: Key(notebook['english'].toString()),
+                  direction: DismissDirection.endToStart,
+                  //从右侧向左滑动
+                  onDismissed: (direction)  {
+                    //从生词本中移除
+                    removeNotebook(notebook['english']);
+                    setState(() {
+                      notebookList.removeAt(index);
+                    });
+                  },
+                  background: stackBehindDismiss(),
+                  //滑动后显示的背景内容
+                  child: ListCell(
+                    notebook['english'],
+                    subTitle: notebook['chinese'],
+                    showDetailArrow: true,
+                  ),
                 ),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider(height: 0);
-          },
-          itemCount: notebookList.length,
+              );
+            },
+            separatorBuilder: (context, index) {
+              return Divider(height: 0);
+            },
+            itemCount: notebookList.length,
+          ),
         ),
       );
     });
