@@ -16,6 +16,7 @@ class FavoriteListPage extends StatefulWidget {
 class _FavoriteListPageState extends State<FavoriteListPage> {
   List<Map> notebookList = [];
   int favoriteValue = 0;
+  int noteboolListCount = -1; //单词数量，默认-1代表未知
 
   @override
   void initState() {
@@ -36,44 +37,74 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
               title: Text('生词本'),
             ),
             preferredSize: Size.fromHeight(44.0)),
-        body: Scrollbar(
-          child: ListView.separated(
-            itemBuilder: (context, index) {
-              var notebook = notebookList[index];
-              return InkWell(
-                onTap: () {
-                  detailPage(notebook['english']);
-                },
-                child: Dismissible(
-                  //滑动删除
-                  key: Key(notebook['english'].toString()),
-                  direction: DismissDirection.endToStart,
-                  //从右侧向左滑动
-                  onDismissed: (direction)  {
-                    //从生词本中移除
-                    removeNotebook(notebook['english']);
-                    setState(() {
-                      notebookList.removeAt(index);
-                    });
-                  },
-                  background: stackBehindDismiss(),
-                  //滑动后显示的背景内容
-                  child: ListCell(
-                    notebook['english'],
-                    subTitle: notebook['chinese'],
-                    showDetailArrow: true,
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return Divider(height: 0);
-            },
-            itemCount: notebookList.length,
-          ),
-        ),
+        body: mainWidget(),
       );
     });
+  }
+
+  //主界面
+  Widget mainWidget(){
+    if(noteboolListCount == 0){
+      return blankWidget();
+    }else{
+      return listViewWidget();
+    }
+  }
+
+  //空白页面
+  Widget blankWidget(){
+    return Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Image.asset('assets/image/empty.png', height: 140, width: 140, fit: BoxFit.fill,),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('暂无生词'),
+        ),
+        SizedBox(height: 40,)
+      ],
+    ),);
+  }
+
+  //列表页面
+  Widget listViewWidget(){
+    return Scrollbar(
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          var notebook = notebookList[index];
+          return InkWell(
+            onTap: () {
+              detailPage(notebook['english']);
+            },
+            child: Dismissible(
+              //滑动删除
+              key: Key(notebook['english'].toString()),
+              direction: DismissDirection.endToStart,
+              //从右侧向左滑动
+              onDismissed: (direction)  {
+                //从生词本中移除
+                removeNotebook(notebook['english']);
+                setState(() {
+                  notebookList.removeAt(index);
+                });
+              },
+              background: stackBehindDismiss(),
+              //滑动后显示的背景内容
+              child: ListCell(
+                notebook['english'],
+                subTitle: notebook['chinese'],
+                showDetailArrow: true,
+              ),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(height: 0);
+        },
+        itemCount: notebookList.length,
+      ),
+    );
   }
 
   Widget stackBehindDismiss() {
@@ -93,6 +124,7 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
     //数据库查询后需要转换存放到原来的list中，否则remove方法无法调用
     notebookList.clear();
     notebookList.addAll(dbNotebookList);
+    noteboolListCount = notebookList.length;
     setState(() {});
   }
 
