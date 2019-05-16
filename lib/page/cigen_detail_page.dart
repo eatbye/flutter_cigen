@@ -5,11 +5,11 @@ import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:audioplayer/audioplayer.dart';
+//import 'package:audioplayer/audioplayer.dart';
 import 'package:intl/intl.dart';
 import 'package:provide/provide.dart';
 import 'package:connectivity/connectivity.dart';
-
+import 'package:flutter_media_player/flutter_media_player.dart';
 
 class CigenDetailPage extends StatefulWidget {
   var word;
@@ -23,7 +23,7 @@ class CigenDetailPage extends StatefulWidget {
 
 class _CigenDetailPageState extends State<CigenDetailPage> {
   bool favorite = false;
-  AudioPlayer audioPlayer = new AudioPlayer();
+  //AudioPlayer audioPlayer = new AudioPlayer();
   final Connectivity _connectivity = Connectivity();
 
 
@@ -268,7 +268,18 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
 
   void playVoiceAction() async{
     String url = 'http://dict.youdao.com/dictvoice?audio='+widget.word['word']+'&type=2';
-    await audioPlayer.play(url);
+    //await audioPlayer.play(url);
+    await FlutterMediaPlayer.play(url);
+    var volume = await FlutterMediaPlayer.getVolume();
+    //print(volume);
+    if(volume <= 0.1) {
+      Fluttertoast.showToast(
+        msg: "音量过小，建议调节音量",
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+      );
+    }
   }
 
   //加入收藏、取消收藏

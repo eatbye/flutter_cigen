@@ -27,13 +27,15 @@ dependencies:
   weui: ^0.0.4
   flutter_html: ^0.9.6
   fluttertoast: ^3.0.4
-  audioplayer: ^0.5.2
+#  audioplayer: ^0.5.2
   intl: ^0.15.8
   cupertino_controllers: ^0.1.0
   provide: ^1.0.2     #状态管理
   flutter_bugly: ^0.2.0
   connectivity: ^0.4.3+1    # 网络检测
-
+  flutter_media_player:
+          git:
+            url: https://github.com/eatbye/flutter_media_player.git
 
 dev_dependencies:
   flutter_test:
