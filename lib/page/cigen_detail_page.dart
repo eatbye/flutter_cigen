@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayer/audioplayer.dart';
 import 'package:intl/intl.dart';
 import 'package:provide/provide.dart';
+import 'package:connectivity/connectivity.dart';
 
 
 class CigenDetailPage extends StatefulWidget {
@@ -23,12 +24,14 @@ class CigenDetailPage extends StatefulWidget {
 class _CigenDetailPageState extends State<CigenDetailPage> {
   bool favorite = false;
   AudioPlayer audioPlayer = new AudioPlayer();
+  final Connectivity _connectivity = Connectivity();
 
 
   @override
   void initState() {
     super.initState();
     getWordInfo();
+    initConnectivity();
   }
 
   @override
@@ -305,5 +308,43 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
     setState(() {});
 
   }
+
+  Future<Null> initConnectivity() async {
+    ConnectivityResult result;
+    bool success = true;
+    //平台消息可能会失败，因此我们使用Try/Catch PlatformException。
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on Exception catch (e) {
+      success = false;
+      print(e.toString());
+    }
+
+    print(result);
+
+    if(result== ConnectivityResult.none){
+      success = false;
+    }
+
+    if(success == false){
+      Fluttertoast.showToast(
+        msg: "网络连接失败，单词发音不可用，请打开网络",
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+      );
+
+    }
+
+    //print(connectionStatus);
+
+    // 如果在异步平台消息运行时从树中删除了该小部件，
+    // 那么我们希望放弃回复，而不是调用setstate来更新我们不存在的外观。
+    //if (!mounted) {
+    //  return;
+    //}
+
+  }
+
 
 }

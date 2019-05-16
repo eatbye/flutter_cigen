@@ -32,7 +32,7 @@ dependencies:
   cupertino_controllers: ^0.1.0
   provide: ^1.0.2     #状态管理
   flutter_bugly: ^0.2.0
-
+  connectivity: ^0.4.3+1    # 网络检测
 
 
 dev_dependencies:
