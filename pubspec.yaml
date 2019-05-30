@@ -36,6 +36,7 @@ dependencies:
   flutter_media_player:
           git:
             url: https://github.com/eatbye/flutter_media_player.git
+  fake_analytics: ^0.1.0+1   #百度统计
 
 dev_dependencies:
   flutter_test:

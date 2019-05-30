@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/bottom_bar_page.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
-
+import 'package:fake_analytics/fake_analytics.dart';
 //void main() => runApp(MyApp());
 
 //void main() => runApp(ListViewApp());
@@ -29,14 +31,27 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '词根词缀',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-          appBarTheme: AppBarTheme(elevation: 0.5, textTheme: TextTheme(title: TextStyle(fontSize: 17.0)))
+    //百度统计
+    Analytics analytics = Analytics();
+    if (Platform.isIOS) {
+      analytics.startWork(
+        appKey: '7c70cee572',  //词根词缀背单词
+        appChannel: () => Future.value('official'),
+        enableDebug: true,
+      );
+    }
+
+    return AnalyticsProvider(
+      analytics: analytics,
+      child: MaterialApp(
+        title: '词根词缀',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+            appBarTheme: AppBarTheme(elevation: 0.5, textTheme: TextTheme(title: TextStyle(fontSize: 17.0)))
+        ),
+        home: BottomBarPage(),
       ),
-      home: BottomBarPage(),
     );
   }
 
