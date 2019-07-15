@@ -6,6 +6,7 @@ import 'package:flutter_cigen/util/counter.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:fake_analytics/fake_analytics.dart';
+import 'package:flutter_umplus/flutter_umplus.dart';
 //void main() => runApp(MyApp());
 
 //void main() => runApp(ListViewApp());
@@ -60,6 +61,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     initBugly();
+
+    initUMeng();
   }
 
   //bugly加载
@@ -72,6 +75,18 @@ class _MyAppState extends State<MyApp> {
     ).then((_result) {
       print(_result.message);
     });
+  }
+
+  initUMeng() {
+    // channel 可设置为空
+    FlutterUmplus.init(
+      '5d2bc6394ca3573fad000a15',
+      channel: 'appstore',
+      reportCrash: true,
+      logEnable: false,
+      encrypt: true,
+    );
+
   }
 }
 
