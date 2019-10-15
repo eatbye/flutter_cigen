@@ -5,7 +5,7 @@ import 'package:flutter_cigen/page/bottom_bar_page.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
-import 'package:fake_analytics/fake_analytics.dart';
+//import 'package:fake_analytics/fake_analytics.dart';
 import 'package:flutter_umplus/flutter_umplus.dart';
 //void main() => runApp(MyApp());
 
@@ -28,11 +28,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-
-
   @override
   Widget build(BuildContext context) {
     //百度统计
+    /*
     Analytics analytics = Analytics();
     if (Platform.isIOS) {
       analytics.startWork(
@@ -41,10 +40,8 @@ class _MyAppState extends State<MyApp> {
         enableDebug: true,
       );
     }
-
-    return AnalyticsProvider(
-      analytics: analytics,
-      child: MaterialApp(
+    */
+    return  MaterialApp(
         title: '词根词缀',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -52,8 +49,7 @@ class _MyAppState extends State<MyApp> {
             appBarTheme: AppBarTheme(elevation: 0.5, textTheme: TextTheme(title: TextStyle(fontSize: 17.0)))
         ),
         home: BottomBarPage(),
-      ),
-    );
+      );
   }
 
   @override
