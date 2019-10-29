@@ -30,7 +30,8 @@ dependencies:
 #  audioplayer: ^0.5.2
   intl: ^0.15.8
   cupertino_controllers: ^0.1.0
-  provide: ^1.0.2     #状态管理
+#  provide: ^1.0.2     #状态管理
+  provider: ^3.1.0+1
   flutter_bugly: ^0.2.7
   connectivity: ^0.4.4+1    # 网络检测
   flutter_media_player:

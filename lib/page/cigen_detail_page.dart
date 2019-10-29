@@ -7,9 +7,10 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:audioplayer/audioplayer.dart';
 import 'package:intl/intl.dart';
-import 'package:provide/provide.dart';
+//import 'package:provide/provide.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_media_player/flutter_media_player.dart';
+import 'package:provider/provider.dart';
 
 class CigenDetailPage extends StatefulWidget {
   var word;
@@ -314,7 +315,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
     }
 
     //状态更新（收藏）
-    Provide.value<Counter>(context).favorite();
+    Provider.of<Counter>(context, listen: false).favorite();
 
     setState(() {});
 

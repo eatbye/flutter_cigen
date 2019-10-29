@@ -6,7 +6,8 @@ import 'package:flutter_cigen/page/cigen_detail_page.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:flutter_cigen/widget/list_cell.dart';
 import 'package:flutter_cigen/widget/title_widget.dart';
-import 'package:provide/provide.dart';
+//import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
 import 'package:weui/weui.dart';
 
 class CigenInfoPage extends StatefulWidget {
@@ -93,7 +94,8 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
                     child: ListCell(word['word'], subTitle:word['notes'], showDetailArrow: true,),
                     onTap: (){
                       //状态更新(已读)
-                      Provide.value<Counter>(context).read();
+//                      Provider.value<Counter>(context).read();
+                        Provider.of<Counter>(context, listen: false).read();
                       Navigator.push(
                           context,
                           CupertinoPageRoute(

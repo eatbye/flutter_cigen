@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/bottom_bar_page.dart';
 import 'package:flutter_cigen/util/counter.dart';
-import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
 //import 'package:fake_analytics/fake_analytics.dart';
 import 'package:flutter_umplus/flutter_umplus.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_umplus/flutter_umplus.dart';
 //void main() => runApp(ListViewApp());
 //void main() => runApp(NotebookListPage());
 
+/*
 void main() => FlutterBugly.postCatchedException(() {
   //main函数里面引用provide
   var counter = Counter();
@@ -19,6 +20,10 @@ void main() => FlutterBugly.postCatchedException(() {
   providers..provide(Provider<Counter>.value(counter));
   runApp(ProviderNode(child: MyApp(),providers: providers,));
 });
+
+ */
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -28,6 +33,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
+  /*
   @override
   Widget build(BuildContext context) {
     //百度统计
@@ -41,6 +47,9 @@ class _MyAppState extends State<MyApp> {
       );
     }
     */
+
+
+
     return  MaterialApp(
         title: '词根词缀',
         debugShowCheckedModeBanner: false,
@@ -50,6 +59,28 @@ class _MyAppState extends State<MyApp> {
         ),
         home: BottomBarPage(),
       );
+  }
+
+   */
+
+  var counter = Counter();
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => counter),
+      ],
+      child: MaterialApp(
+        title: '词根词缀',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            appBarTheme: AppBarTheme(elevation: 0.5, textTheme: TextTheme(title: TextStyle(fontSize: 17.0)))
+        ),
+        home: BottomBarPage(),
+      ),
+    );
   }
 
   @override
