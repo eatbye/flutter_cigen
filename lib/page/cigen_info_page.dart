@@ -49,7 +49,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
             ),
             Divider(height: 0),
             Container(
-                decoration: BoxDecoration(color: Colors.white),
+//                decoration: BoxDecoration(color: Colors.white),
                 padding: EdgeInsets.all(12),
                 child: Text(widget.item['desc'])),
             Divider(height: 0),
@@ -89,7 +89,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
             itemBuilder: (context, index) {
               var word = wordList[index];
               return Container(
-                  decoration: BoxDecoration(color: Colors.white),
+//                  decoration: BoxDecoration(color: Colors.white),
                   child: InkWell(
                     child: ListCell(word['word'], subTitle:word['notes'], showDetailArrow: true,),
                     onTap: (){
@@ -104,7 +104,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
                   ));
             },
             separatorBuilder: (context, index) {
-              return Divider(height: 0, color: Colors.black26,);
+              return Divider(height: 0);
             },
             itemCount: wordList.length));
   }

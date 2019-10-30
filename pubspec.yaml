@@ -39,6 +39,7 @@ dependencies:
             url: https://github.com/eatbye/flutter_media_player.git
   #fake_analytics: ^0.1.0+1   #百度统计
   flutter_umplus: ^0.0.1 #友盟统计
+  flustars: 0.2.6+1   #工具  https://github.com/Sky24n/flustars
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
     - assets/image/dot_read.png
     - assets/image/dot_unread.png
     - assets/image/empty.png
+    - assets/image/blank.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

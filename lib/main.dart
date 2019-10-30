@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/bottom_bar_page.dart';
+import 'package:flutter_cigen/provider/theme_provider.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
+
 //import 'package:fake_analytics/fake_analytics.dart';
 import 'package:flutter_umplus/flutter_umplus.dart';
 //void main() => runApp(MyApp());
@@ -32,7 +34,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   /*
   @override
   Widget build(BuildContext context) {
@@ -65,12 +66,14 @@ class _MyAppState extends State<MyApp> {
 
   var counter = Counter();
 
+  /*
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(builder: (_) => counter),
       ],
+
       child: MaterialApp(
         title: '词根词缀',
         debugShowCheckedModeBanner: false,
@@ -83,6 +86,56 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+   */
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => counter),
+      ],
+
+      child: ChangeNotifierProvider<ThemeProvider>(
+        builder: (_) => ThemeProvider(),
+        child: Consumer<ThemeProvider>(
+          builder: (_, provider, __) {
+            return MaterialApp(
+              title: 'Flutter Deer',
+              //showPerformanceOverlay: true, //显示性能标签
+              debugShowCheckedModeBanner: false,
+              theme: provider.getTheme(),
+              darkTheme: provider.getTheme(isDarkMode: true),
+              home: BottomBarPage(),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  /*
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<ThemeProvider>(
+      builder: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (_, provider, __) {
+          return MaterialApp(
+            title: 'Flutter Deer',
+            //showPerformanceOverlay: true, //显示性能标签
+            debugShowCheckedModeBanner: false,
+            theme: provider.getTheme(),
+            darkTheme: provider.getTheme(isDarkMode: true),
+            home: BottomBarPage(),
+          );
+        },
+      ),
+    );
+  }
+   */
+
+
+
   @override
   void initState() {
     super.initState();
@@ -93,12 +146,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   //bugly加载
-  void initBugly(){
+  void initBugly() {
     FlutterBugly.init(
 //      androidAppId: "b07803fb45",
       iOSAppId: "301ca8382b",
       autoCheckUpgrade: false,
-
     ).then((_result) {
       print(_result.message);
     });
@@ -113,7 +165,5 @@ class _MyAppState extends State<MyApp> {
       logEnable: false,
       encrypt: true,
     );
-
   }
 }
-

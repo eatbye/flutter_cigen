@@ -76,7 +76,7 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Image.asset('assets/image/empty.png', height: 140, width: 140, fit: BoxFit.fill,),
+        Image.asset('assets/image/blank.png', width: 140, fit: BoxFit.fill,),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text('暂无生词'),

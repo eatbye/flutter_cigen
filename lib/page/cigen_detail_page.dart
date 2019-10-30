@@ -89,7 +89,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
             child: Icon(
               CupertinoIcons.volume_up,
               size: 36,
-              color: Colors.black87,
+//              color: Colors.black87,
             ),
           ),
         ),
@@ -99,7 +99,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
 
   Widget detailWidget() {
     return Container(
-      decoration: BoxDecoration(color: Colors.white),
+//      decoration: BoxDecoration(color: Colors.white),
       child: ListView(
         padding: EdgeInsets.all(12),
         children: <Widget>[
