@@ -7,11 +7,13 @@ class Counter with ChangeNotifier{
   read(){
     readValue++;
     notifyListeners();        //通知引用该变量地方的改变值
+
   }
 
   favorite(){
     favoriteValue++;
     notifyListeners();
+
   }
 
 }
