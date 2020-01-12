@@ -20,7 +20,7 @@ class ListCell extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(title),
+                  Text(title, style: TextStyle(fontSize: 16.0),),
                   subTitleWidget(),
                 ],
               ),
@@ -36,7 +36,7 @@ class ListCell extends StatelessWidget {
     }else{
       return Text(
         subTitle,
-        style: TextStyle(color: Colors.black87, fontSize: 13.0),
+        style: TextStyle(fontSize: 13.0),
       );
     }
   }
@@ -45,7 +45,7 @@ class ListCell extends StatelessWidget {
     if(showDetailArrow){
       return Padding(
         padding: const EdgeInsets.only(left: 4),
-        child: Icon(Icons.arrow_forward_ios, color: Colors.black54, size: 14,),
+        child: Icon(Icons.arrow_forward_ios,  size: 14,),
       );
     }else{
       return Container();

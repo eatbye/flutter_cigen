@@ -5,7 +5,8 @@ import 'package:flutter_cigen/dao/word_dao.dart';
 import 'package:flutter_cigen/page/cigen_detail_page.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:flutter_cigen/widget/list_cell.dart';
-import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
+//import 'package:provide/provide.dart';
 
 //生词本列表
 class FavoriteListPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
 
   @override
   Widget build(BuildContext context) {
+    /*
     return Provide<Counter>(builder: (context, child, counter) {
       if (counter.favoriteValue != favoriteValue) {
         favoriteValue = counter.favoriteValue;
@@ -40,6 +42,23 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
         body: mainWidget(),
       );
     });
+
+     */
+
+    var providerFavoriteValue = Provider.of<Counter>(context).favoriteValue;
+    if(providerFavoriteValue != favoriteValue){
+      favoriteValue = providerFavoriteValue;
+      getNotebook();
+    }
+
+    return Scaffold(
+      appBar: PreferredSize(
+          child: AppBar(
+            title: Text('生词本'),
+          ),
+          preferredSize: Size.fromHeight(44.0)),
+      body: mainWidget(),
+    );
   }
 
   //主界面
@@ -57,7 +76,7 @@ class _FavoriteListPageState extends State<FavoriteListPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Image.asset('assets/image/empty.png', height: 140, width: 140, fit: BoxFit.fill,),
+        Image.asset('assets/image/blank.png', width: 140, fit: BoxFit.fill,),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text('暂无生词'),

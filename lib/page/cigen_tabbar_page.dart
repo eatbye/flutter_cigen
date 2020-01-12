@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/page/cigen_list_page.dart';
 import 'package:flutter_cigen/page/dict_page.dart';
+import 'package:flutter_cigen/res/colors.dart';
 
 class CigenTabbarPage extends StatefulWidget {
   @override
@@ -43,6 +44,7 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
 
   @override
   Widget build(BuildContext context) {
+    var isDart = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: PreferredSize(
           child: AppBar(
@@ -57,8 +59,8 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
               controller: _controller,
               indicatorSize: TabBarIndicatorSize.tab,  //下划线宽度
               isScrollable: false,
-              labelColor: Colors.blue,
-              unselectedLabelColor: Colors.black54,
+              labelColor: isDart ? Colors.white : Colors.blue,
+              unselectedLabelColor: isDart ? Colours.dark_text  : Colors.black54,
             ),
           ),
           Divider(height: 0,),

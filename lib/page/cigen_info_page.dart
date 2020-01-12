@@ -6,7 +6,8 @@ import 'package:flutter_cigen/page/cigen_detail_page.dart';
 import 'package:flutter_cigen/util/counter.dart';
 import 'package:flutter_cigen/widget/list_cell.dart';
 import 'package:flutter_cigen/widget/title_widget.dart';
-import 'package:provide/provide.dart';
+//import 'package:provide/provide.dart';
+import 'package:provider/provider.dart';
 import 'package:weui/weui.dart';
 
 class CigenInfoPage extends StatefulWidget {
@@ -48,7 +49,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
             ),
             Divider(height: 0),
             Container(
-                decoration: BoxDecoration(color: Colors.white),
+//                decoration: BoxDecoration(color: Colors.white),
                 padding: EdgeInsets.all(12),
                 child: Text(widget.item['desc'])),
             Divider(height: 0),
@@ -88,12 +89,13 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
             itemBuilder: (context, index) {
               var word = wordList[index];
               return Container(
-                  decoration: BoxDecoration(color: Colors.white),
+//                  decoration: BoxDecoration(color: Colors.white),
                   child: InkWell(
                     child: ListCell(word['word'], subTitle:word['notes'], showDetailArrow: true,),
                     onTap: (){
                       //状态更新(已读)
-                      Provide.value<Counter>(context).read();
+//                      Provider.value<Counter>(context).read();
+                        Provider.of<Counter>(context, listen: false).read();
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
@@ -102,7 +104,7 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
                   ));
             },
             separatorBuilder: (context, index) {
-              return Divider(height: 0, color: Colors.black26,);
+              return Divider(height: 0);
             },
             itemCount: wordList.length));
   }
