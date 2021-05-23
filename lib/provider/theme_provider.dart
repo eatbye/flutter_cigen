@@ -84,4 +84,16 @@ class ThemeProvider extends ChangeNotifier {
     );
   }
 
+  ThemeMode getThemeMode(){
+    var theme = SpUtil.getString(Constant.theme);
+    switch(theme) {
+      case 'Dark':
+        return ThemeMode.dark;
+      case 'Light':
+        return ThemeMode.light;
+      default:
+        return ThemeMode.system;
+    }
+  }
+
 }

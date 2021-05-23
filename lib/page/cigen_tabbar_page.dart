@@ -24,7 +24,7 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
     ),
   ];
 
-  TabController _controller;
+  // TabController _controller;
 
   final List<Widget> pages = [
     CigenListPage('1'),
@@ -36,14 +36,47 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
   @override
   void initState() {
     super.initState();
-    _controller = TabController(
-      length: pages.length,
-      vsync: ScrollableState(),
+    // _controller = TabController();
+    // _controller = TabController(
+    //   length: pages.length,
+    //   initialIndex: 0,
+    //   vsync: ScrollableState(),
+    // );
+
+  }
+
+
+  Widget build(BuildContext context) {
+    var isDart = Theme.of(context).brightness == Brightness.dark;
+    return DefaultTabController(
+      initialIndex: 0,
+      length: _tabList.length,
+      child: Scaffold(
+        appBar: PreferredSize(
+            child: AppBar(
+              title: Text('词根词缀'),
+            ),
+            preferredSize: Size.fromHeight(44.0)),
+        body: Column(
+          children: [
+            TabBar(
+              tabs: _tabList,
+              labelColor: isDart ? Colors.white : Colors.blue,
+              unselectedLabelColor: isDart ? Colours.dark_text  : Colors.black54,
+            ),
+            Expanded(
+              child: TabBarView(
+                children: pages,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build1(BuildContext context) {
     var isDart = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: PreferredSize(
@@ -51,27 +84,52 @@ class _CigenTabbarPageState extends State<CigenTabbarPage> {
             title: Text('词根词缀'),
           ),
           preferredSize: Size.fromHeight(44.0)),
-      body: Column(
-        children: <Widget>[
-          Container(
-            child: TabBar(
-              tabs: _tabList,
-              controller: _controller,
-              indicatorSize: TabBarIndicatorSize.tab,  //下划线宽度
-              isScrollable: false,
-              labelColor: isDart ? Colors.white : Colors.blue,
-              unselectedLabelColor: isDart ? Colours.dark_text  : Colors.black54,
-            ),
-          ),
-          Divider(height: 0,),
-          Expanded(
-            child: TabBarView(
-              children: pages,
-              controller: _controller,
-            ),
-          )
-        ],
-      ),
+      body: buildMain(isDart),
     );
   }
+
+  Widget buildMain(bool isDart) {
+    return Column(
+      children: [
+        Container(
+          child: TabBar(
+            tabs: _tabList,
+          ),
+        ),
+        Expanded(
+          child: TabBarView(
+            children: pages,
+            // controller: _controller,
+          ),
+        )
+      ],
+    );
+  }
+
+  /*
+  Widget buildMain1(bool isDart) {
+    return Column(
+      children: <Widget>[
+        Container(
+          child: TabBar(
+            tabs: _tabList,
+            controller: _controller,
+            indicatorSize: TabBarIndicatorSize.tab,  //下划线宽度
+            isScrollable: false,
+            labelColor: isDart ? Colors.white : Colors.blue,
+            unselectedLabelColor: isDart ? Colours.dark_text  : Colors.black54,
+          ),
+        ),
+        Divider(height: 0,),
+        Expanded(
+          child: TabBarView(
+            children: pages,
+            controller: _controller,
+          ),
+        )
+      ],
+    );
+  }
+
+   */
 }

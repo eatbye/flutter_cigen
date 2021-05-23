@@ -1,4 +1,5 @@
-import 'package:cupertino_controllers/cupertino_controllers.dart';
+// import 'package:cupertino_controllers/cupertino_controllers.dart';
+import 'package:cupertino_controllers/widgets/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cigen/dao/word_dao.dart';

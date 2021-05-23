@@ -9,8 +9,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 //import 'package:provide/provide.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter_media_player/flutter_media_player.dart';
+// import 'package:flutter_media_player/flutter_media_player.dart';
 import 'package:provider/provider.dart';
+import 'package:just_audio/just_audio.dart';
+import 'dart:async';
 
 class CigenDetailPage extends StatefulWidget {
   var word;
@@ -27,6 +29,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
   //AudioPlayer audioPlayer = new AudioPlayer();
   final Connectivity _connectivity = Connectivity();
 
+  String voicePlayerIcon = 'assets/image/voice3.png';
 
   @override
   void initState() {
@@ -86,11 +89,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
             onPressed: () {
               playVoiceAction();
             },
-            child: Icon(
-              CupertinoIcons.volume_up,
-              size: 36,
-//              color: Colors.black87,
-            ),
+            child: Image.asset(voicePlayerIcon, width: 36,),
           ),
         ),
       ],
@@ -268,6 +267,7 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
   }
 
   void playVoiceAction() async{
+    /*
     String url = 'http://dict.youdao.com/dictvoice?audio='+widget.word['word']+'&type=2';
     //await audioPlayer.play(url);
     await FlutterMediaPlayer.play(url);
@@ -281,6 +281,33 @@ class _CigenDetailPageState extends State<CigenDetailPage> {
         textColor: Colors.white,
       );
     }
+
+     */
+
+    String url = 'http://dict.youdao.com/dictvoice?audio='+widget.word['word']+'&type=2';
+    final player = AudioPlayer();
+    var duration = await player.setUrl(url);
+    player.play();
+    //播放动画
+    this.voicePlay();
+  }
+
+  //声音播放的图标，使用timer实现
+  void voicePlay() {
+    int count = 1;
+    const period = const Duration(milliseconds: 200);
+    Timer.periodic(period, (timer) {
+      voicePlayerIcon = 'assets/image/voice'+count.toString()+'.png';
+      setState(() {
+
+      });
+      count++;
+      if (count > 6) {
+        //取消定时器，避免无限回调
+        timer.cancel();
+        timer = null;
+      }
+    });
   }
 
   //加入收藏、取消收藏

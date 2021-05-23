@@ -8,7 +8,6 @@ import 'package:flutter_cigen/widget/list_cell.dart';
 import 'package:flutter_cigen/widget/title_widget.dart';
 //import 'package:provide/provide.dart';
 import 'package:provider/provider.dart';
-import 'package:weui/weui.dart';
 
 class CigenInfoPage extends StatefulWidget {
   var item;
