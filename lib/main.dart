@@ -46,14 +46,14 @@ class _MyAppState extends State<MyApp> {
     Provider.debugCheckInvalidValueType = null;
     return MultiProvider(
       providers: [
-        Provider<Counter>(create: (_) => Counter()),
+        ChangeNotifierProvider(create: (_)=>Counter())  //新的provider调用方法
       ],
       child: ChangeNotifierProvider<ThemeProvider>(
         create: (_) => ThemeProvider(),
         child: Consumer<ThemeProvider>(
           builder: (_, provider, __) {
             return MaterialApp( //MaterialApp
-              title: 'Flutter Deer',
+              title: '词根词缀',
               //showPerformanceOverlay: true, //显示性能标签
               debugShowCheckedModeBanner: false,
               theme: provider.getTheme(),

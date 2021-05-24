@@ -25,8 +25,21 @@ class _CigenInfoPageState extends State<CigenInfoPage> {
   @override
   void initState() {
     super.initState();
-    getWordList();
-    setReadFlag();
+    /*
+    Future.microtask(() =>
+        getWordList()
+    );
+    Future.microtask(() =>
+      setReadFlag()
+    );
+    */
+    Future.microtask((){
+      getWordList();
+      setReadFlag();
+    });
+
+    // getWordList();
+    // setReadFlag();
   }
 
   @override
